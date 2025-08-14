@@ -1,0 +1,20 @@
+name: Monitor de Publicações Araioses
+
+on:
+  schedule:
+    - cron: "*/15 * * * *" # Executa a cada 15 minutos
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configura Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Instala dependências
+        run: pip install -r requirements.txt
+      - name: Roda monitor
+        run: python monitor.py
